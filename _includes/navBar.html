@@ -1,0 +1,38 @@
+<div class="jumbotron">
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-lg fas fa-home align-center" onclick="window.location='https://hmartinez20.github.io/STMUmarket/index.html'"></button>
+    <div>
+      <h1 class="d-flex justify-content-center align-center block"> StMU Marketplace </h1>
+      <h4 class="block text-center"> <i>Don't trash it! Sell it</i></h4>
+    </div>
+  	<div class="row text-right align-items-center">
+    	<div id="accountButtons">	
+    		<a class="mr-2" href="https://hmartinez20.github.io/STMUmarket/signup.html" id="signUp">Sign Up</a>
+        <br>
+        <a class="mr-2" href="https://hmartinez20.github.io/STMUmarket/login.html" id="login">Login</a>
+        <br>
+        <a class="mr-2" href="https://hmartinez20.github.io/STMUmarket/account.html" id="myAccount">My Account</a>
+        <br>
+        <a class="mr-2" href="#" onclick="logout();" id="signOut">Sign Out</a>
+    	</div>
+    	<div><img style="width: 5rem; height: 5rem;" src="/STMUmarket/cart.png" alt="User Image"></div>
+    </div>
+  </div>
+  <br>
+  <div class="btn-group col" role="group">
+    <button type="button" class="btn btn-info col" onclick="window.location='https://hmartinez20.github.io/STMUmarket/item.html'">Item Page</button>
+    <button type="button" class="btn btn-secondary col" onclick="window.location='https://hmartinez20.github.io/STMUmarket/seller.html#cHA0nV0vUHbEKxS6F4vRfCWMhUS2'">Seller Page</button>
+  </div>
+</div>
+<script src="LoginChecker.js"></script>
+<script>
+ function logout(){
+   firebase.auth().signOut().then(function() {
+  console.log('Signed Out');
+     location.reload();
+}, function(error) {
+  console.error('Sign Out Error', error);
+});
+ }  
+  
+</script>
