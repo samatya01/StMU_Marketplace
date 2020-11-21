@@ -1,0 +1,42 @@
+---
+title: Account Info
+---
+<!DOCTYPE html>
+<html>
+  <header>
+    {% include header.html %} <!-- Jekyll Liquid command -->
+    {% include fire.html %}
+    <script>
+     
+      function whatever(){
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("pass").value;
+        console.log(email);
+        console.log(password);
+       firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+   console.log(error.code);
+   console.log(error.message);
+});
+      }
+    
+    </script>
+  </header>
+  <body>
+  {% include navBar.html %}
+  <br>
+  <h1>Sign Up</h1>
+      <p>Please sign in here with your email and password.</p>
+      <hr>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required  id="email" >
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="pass" >
+      <div class="clearfix">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signinbtn"   onclick="whatever()"     >Sign in</button>
+      </div>
+    </div>
+  </body>
+</html> 

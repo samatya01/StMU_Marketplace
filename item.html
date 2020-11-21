@@ -1,0 +1,136 @@
+---
+title: Item
+---
+<!DOCTYPE html>
+<html>
+  <header>
+    {% include header.html %} <!-- Jekyll Liquid command -->
+    {% include fire.html %}
+  </header>
+<style>
+    div.absolute {
+  	position: absolute;
+  	top: 400px;
+  	left: 800px;
+  	width: 500px;
+  	height: 450px;
+  	border: 3px solid gray;
+  	padding: 10px;
+  	margin: 0;
+	}
+</style>
+  <body>
+    {% include navBar.html %}
+      
+
+     	<div id="images">
+	<!-- 	<IMG STYLE="position:absolute; TOP:350px; LEFT:300px; WIDTH:450px; HEIGHT:500px" src="{{site.baseurl}}/Empty.jpg" hspace="20">  -->
+		<IMG STYLE="position:absolute; TOP:350px; LEFT:10px; WIDTH:125px; HEIGHT:125px" src="{{site.baseurl}}/Empty.jpg" hspace="20">
+		<IMG STYLE="position:absolute; TOP:525px; LEFT:10px; WIDTH:125px; HEIGHT:125px" src="{{site.baseurl}}/Empty.jpg" hspace="20">
+		<IMG STYLE="position:absolute; TOP:700px; LEFT:10px; WIDTH:125px; HEIGHT:125px" src="{{site.baseurl}}/Empty.jpg" hspace="20">
+	</div>
+		
+	<div id="postInfo"style="position: absolute; top:350px; left:950px; width:700px; height:25px"></div>
+	<div style="position: absolute; top:500px; left:950px; width:400px; height:25px">
+		
+		
+	 	
+		<?php
+			echo"hh";			?>
+	
+		<!-- This Button triggers a popup that gives seller contact info-->
+		<button class = "btn btn-primary" id="contactPopover" title="Seller Contact Information"
+			data-html="true"
+			data-content="To contact, email xxxxxxxxx@mail.stmarytx.edu <br>
+				      and include STMUM and posting number as email subject"
+			data-placement="bottom"
+			data-trigger="focus" 
+			data-toggle="popover">
+				Contact Seller
+		</button>
+		
+		<br><br>
+		
+		<div class="card">
+			<div class="card-header"> Description </div>
+			<div class="card-body" id="itemDesc"> 
+			</div>
+		</div>
+	</DIV>	
+		
+		<br><br>
+	
+  </body>
+  {% include footer.html %}
+</html>
+<script>
+/* Code to get posting ID */
+var postId = window.location.hash.substring(1)
+console.log(postId);
+/* redirect to home page if no variable was passed */
+if (!(postId)){
+	alert("Error Occurred, Redirecting to Home Page");
+	window.location = "https://hmartinez20.github.io/STMUmarket/";
+}	
+	
+/* Load posting Data */
+db.collection("items").doc(window.postId).get().then(function(doc) {
+	if (doc.exists) { 
+		/* get posting data */
+		var data = doc.data();
+		var title = data.title;
+		var price = data.price;
+		var seller = data.seller;
+		/* path to the specific seller's page */
+		var sellerLink = "seller.html#" + data.sellerId; 
+		
+		/* Display title and price*/
+		var postHead = document.createElement("div");
+		postHead.innerHTML = "<h1>" + title + "</h1> <h3> Seller: <a href=" + sellerLink + ">" + seller +"</a></h3>";
+		postHead.innerHTML+= "<h3>Price: " + price + "</h3>";
+		document.getElementById("postInfo").appendChild(postHead);
+		
+		/* display description*/
+		var desc = document.createElement("p");
+		desc.innerHTML = data.description;
+		document.getElementById("itemDesc").appendChild(desc);
+		
+		/* get and display images */
+		firebase.storage().ref(data.image1).getDownloadURL().then((url) => {
+			console.log(url);
+			/* display main image */
+			var imgHTML = "<img style='position:absolute; TOP:350px; LEFT:300px; WIDTH:600px; HEIGHT:600px' src=" + url + "hspace='20'>"
+			var cardImage = document.createElement("div");
+			cardImage.innerHTML = imgHTML;
+			document.getElementById("images").append(cardImage)
+					}); 
+		/* <IMG STYLE="position:absolute; TOP:350px; LEFT:300px; WIDTH:450px; HEIGHT:500px" src="" hspace="20"> */
+		
+		
+	} else {
+        	// doc doesn't exist
+        	console.log("Requested document does not exist...");
+   	}
+}).catch(function(error) {
+	console.log("Error getting document:", error);
+});
+	
+</script>
+		<!--Script to toggle popover-->
+<script >
+	$(document).ready(function () 
+		{ $("[data-toggle=popover]").popover(); });
+</script>
+
+
+<script>
+window.onload = function() {
+	if (firebase.auth().currentUser){
+		console.log("Signed In")
+	}
+	else{
+		console.log("Not signed In")
+	}
+  };
+	
+</script>

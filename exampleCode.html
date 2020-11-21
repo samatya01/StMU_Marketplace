@@ -1,0 +1,55 @@
+---
+title: Home
+---
+<!DOCTYPE html>
+<html>
+   <head>
+      {% include header.html %}
+      {% include fire.html %}
+   </head>
+   <body>
+   <h1> {{ page.title }} </h1>
+   <div id="fileSubmit">
+     <input type="file" value="upload" id="file-select"/>
+      <button id="file-upload" class="btn btn-info" onclick="handleFileSelect();">Upload</button>
+   </div>
+   
+   </body>
+   <script type="text/javascript">
+      const storage = firebase.storage(); // Reference to storage service
+      
+      var fileButton = document.getElementById("file-upload");
+      //var fileSelect = document.getElementById("file-select");
+      function handleFileSelect(){
+         // Get file
+         var file = document.getElementById("file-select").files[0];
+         
+         // Create storage ref
+         const storageRef = storage.ref('posts/'+file.name);  // Reference to WHERE the image will be stored
+         
+         // Upload File
+         var task = storageRef.put(file);
+         
+         //Upload progress
+         task.on('state_changed',
+            function progress(snapshot){
+            },
+            function error(err){
+               alert(err);
+            },
+            function complete(){
+               alert("Uploaded!");
+            }
+         );
+      }
+     
+      var usersRef = firebase.database().ref("users/");
+      function writeNewUser(){
+         usersRef.push({
+            name: "Jane",
+            number: 1,
+            age: 30
+         });
+      }
+   </script>
+</html>

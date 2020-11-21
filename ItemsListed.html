@@ -1,0 +1,148 @@
+---
+title: Items Listed Page
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+    {% include fire.html %}
+
+
+  </head>
+	<body>
+		{% include navBar.html %}
+		
+		<div id="fileSubmit">
+		   </div>
+		
+		<!-- BODY WITH THE PRO PIC, USERNAMES AND EDIT PROFILE BUTTON -->
+		<div class="container-fluid">
+			<div class="row ml-5 mr-5">
+				<div class="col-xl-3">
+				  <img src="{{site.baseurl}}/Empty.jpg" class="mx-auto d-block img-circle" style= "height: 12rem; width: 12rem;" alt="Profile Picture">
+				</div>
+				<div class="col-xl-9"> 
+						<h2 class = "ml-5">User Name</h2>
+						<h4 class = "ml-5">FirstName LastName</h4>
+						<button type ="button" class="ml-5 btn btn-outline-primary">Edit Profile</button>
+			  </div> 
+			</div> 
+		</div>
+
+		<!-- AVERAGE USER RATING AND NAVIGATION BAR -->
+		<div class="container-fluid">
+				<div class="row ml-5 mr-5"> 
+					<div class = "col-xl-3"> 
+						<h5 class = "d-block text-center"> Average User Rating</h5>
+							<div class ="d-flex justify-content-center">
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star"></span>
+								<span class="fas fa-star"></span>
+							</div>
+						</div>
+
+					<div class = "col-xl-9">
+						 <ul class="nav nav-tabs nav-justified">
+							 <li class="nav-item">
+									<a class="bg-light text-dark nav-link active" href="https://hmartinez20.github.io/STMUmarket/account.html">My Information</a>
+							 </li>
+							 <li class="nav-item">
+									<a class="bg-secondary text-white nav-link active" href="https://hmartinez20.github.io/STMUmarket/ItemsListed.html">Items Listed</a>
+							 </li>
+							 <li class="nav-item">
+									<a class="bg-light text-dark nav-link" href="https://hmartinez20.github.io/STMUmarket/ItemsPurchased.html">Items Purchased</a>
+							 </li>
+						 </ul>
+					</div>
+				</div> 
+		</div>
+		
+		<!-- BELOW THE ITEM NAV BAR -->
+		<div class="container-fluid bg-light">
+			 <div class="row ml-5 mr-5"> 
+				 <div class = "col-xl-3">
+				 	<button type="button" class="mt-5 mx-auto d-block bg-transparent text-dark btn btn-primary" data-toggle="collapse" data-target="#ProfileDesc">About Myself</button>
+					  <div id="ProfileDesc" class="ml-3 collapse">
+						My Life is GOOD!
+					  </div>
+				 </div>
+				 
+				 <div class = "col-xl-9">
+	
+				 </div>
+			 </div>
+		</div>
+		
+		
+		<!-- Create new posting button -->
+		<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		  aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header text-center">
+			<h4 class="modal-title w-100 font-weight-bold">Create New Posting</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		      </div>
+		      <div class="modal-body mx-3">
+
+			<!-- Radio -->
+			<p class="text-left">
+			  <strong>Item Type:</strong>
+			</p>
+			<div class="form-check mb-4">
+			  <input class="form-check-input" name="group1" type="radio" id="radio-179" value="option1" checked>
+			  <label class="form-check-label" for="radio-179">Books</label>
+			</div>
+
+			<div class="form-check mb-4">
+			  <input class="form-check-input" name="group1" type="radio" id="radio-279" value="option2">
+			  <label class="form-check-label" for="radio-279">Clothing</label>
+			</div>
+
+			<div class="form-check mb-4">
+			  <input class="form-check-input" name="group1" type="radio" id="radio-379" value="option3">
+			  <label class="form-check-label" for="radio-379">Fruniture</label>
+			</div>
+			<div class="form-check mb-4">
+			  <input class="form-check-input" name="group1" type="radio" id="radio-479" value="option4">
+			  <label class="form-check-label" for="radio-479">Misc.</label>
+			</div>
+			<!-- Radio -->
+
+			<div class="md-form mb-5">
+			  <i class="fas fa-user prefix grey-text"></i>
+			  <input type="text" id="form34" class="form-control validate">
+			  <label data-error="wrong" data-success="right" for="form34">Item Name</label>
+			</div>
+
+			<div class="md-form mb-5">
+			  <i class="fas fa-envelope prefix grey-text"></i>
+			  <input type="email" id="form29" class="form-control validate">
+			  <label data-error="wrong" data-success="right" for="form29">Price</label>
+			</div>
+
+
+			<div class="md-form">
+			  <i class="fas fa-pencil prefix grey-text"></i>
+			  <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+			  <label data-error="wrong" data-success="right" for="form8">Item Description</label>
+			</div>	      
+		      </div>
+		      <div class="modal-footer d-flex justify-content-center">
+			<button class="btn btn-unique">Create Posting<i class="fas fa-paper-plane-o ml-1"></i></button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="text-center">
+		  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Create New Posting</a>
+		</div>
+	<!--....THIS IS THE END OF CODE FOR THE CREATE NEW POSTING BUTTON...-->
+	</body>
+	{% include footer.html %}
+</html>

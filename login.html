@@ -1,0 +1,64 @@
+---
+title: Account Login
+---
+<!DOCTYPE html>
+<html>
+  <header>
+    {% include header.html %} <!-- Jekyll Liquid command -->
+    {% include fire.html %}
+	
+    <script>
+	function whatever(){
+		var email = document.getElementById("email").value;
+		var password = document.getElementById("pass").value;
+
+		firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+   		alert("Hello:" + email);
+			window.location="https://hmartinez20.github.io/STMUmarket/index.html";
+		}).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			if (errorCode === 'auth/wrong-password') {
+				alert('Wrong password.');
+			} 
+			else if (errorCode === 'auth/user-not-found') {
+				alert('user-not-found.');
+			}    
+			else if (errorCode === 'auth/invalid-email') {
+				alert('invalid-email.');
+			}  	
+			});
+	}
+
+ 
+			
+	 </script>	
+  </header>
+  <body>
+  {% include navBar.html %}
+  <br>
+  <h1>Sign In</h1>
+      <p>Please sign in here with your email and password.</p>
+      <hr>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required  id="email" >
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="pass" >
+     
+    <div class="clearfix">
+        <button type="button" class="cancelbtn">Cancel</button>
+       <button type="submit" class="signinbtn"   onclick="whatever();"    >Sign in</button>     
+     <br>
+        <a href="https://hmartinez20.github.io/STMUmarket/signup.html"> Don't have an account? Click Here</a>
+    </div>
+    
+        
+    
+    
+  </body>
+  {% include footer.html %}
+</html> 
+
+<script src="LoginChecker.js"></script>

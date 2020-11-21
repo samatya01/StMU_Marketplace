@@ -1,0 +1,79 @@
+---
+title: Items Purchased Page
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include header.html %}
+    {% include fire.html %}
+
+
+  </head>
+	<body>
+		{% include navBar.html %}
+		
+		<div id="fileSubmit">
+		   </div>
+		
+		<!-- BODY WITH THE PRO PIC, USERNAMES AND EDIT PROFILE BUTTON -->
+		<div class="container-fluid">
+			<div class="row ml-5 mr-5">
+				<div class="col-xl-3">
+				  <img src="{{site.baseurl}}/Empty.jpg" class="mx-auto d-block img-circle" style= "height: 12rem; width: 12rem;" alt="Profile Picture">
+				</div>
+				<div class="col-xl-9"> 
+						<h2 class = "ml-5">User Name</h2>
+						<h4 class = "ml-5">FirstName LastName</h4>
+						<button type ="button" class="ml-5 btn btn-outline-primary">Edit Profile</button>
+			  </div> 
+			</div> 
+		</div>
+
+		<!-- AVERAGE USER RATING AND NAVIGATION BAR -->
+		<div class="container-fluid">
+				<div class="row ml-5 mr-5"> 
+					<div class = "col-xl-3"> 
+						<h5 class = "d-block text-center"> Average User Rating</h5>
+							<div class ="d-flex justify-content-center">
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star checked"></span>
+								<span class="far fa-star"></span>
+								<span class="fas fa-star"></span>
+							</div>
+						</div>
+
+					<div class = "col-xl-9">
+						 <ul class="nav nav-tabs nav-justified">
+							 <li class="nav-item">
+									<a class="bg-light text-dark nav-link active" href="https://hmartinez20.github.io/STMUmarket/account.html">My Information</a>
+							 </li>
+							 <li class="nav-item">
+									<a class="bg-secondary text-white nav-link active" href="https://hmartinez20.github.io/STMUmarket/ItemsListed.html">Items Listed</a>
+							 </li>
+							 <li class="nav-item">
+									<a class="bg-light text-dark nav-link" href="https://hmartinez20.github.io/STMUmarket/ItemsPurchased.html">Items Purchased</a>
+							 </li>
+						 </ul>
+					</div>
+				</div> 
+		</div>
+		
+		<!-- BELOW THE ITEM NAV BAR -->
+		<div class="container-fluid bg-light">
+			 <div class="row ml-5 mr-5"> 
+				 <div class = "col-xl-3">
+				 	<button type="button" class="mt-5 mx-auto d-block bg-transparent text-dark btn btn-primary" data-toggle="collapse" data-target="#ProfileDesc">About Myself</button>
+					  <div id="ProfileDesc" class="ml-3 collapse">
+						My Life is GOOD!
+					  </div>
+				 </div>
+				 
+				 <div class = "col-xl-9">	
+					 
+				 </div>
+			 </div>
+		</div>
+	</body>
+	{% include footer.html %}
+</html>

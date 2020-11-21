@@ -1,0 +1,111 @@
+---
+title: StMU Marketplace
+---
+<!DOCTYPE html>
+<html>
+  <header>
+    {% include header.html %} <!-- Jekyll Liquid command -->
+    {% include fire.html %}
+  </header>
+  <body>
+    {% include navBar.html %} <!-- Jumbotron -->
+    <br>
+		<div class="row">
+			<div class="col-2 pl-4">
+				<div class="btn-group-lg" role="group">
+					<button id="catergories" type="button" class="btn btn-secondary dropdown-toggle d-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</button>
+					<div class="dropdown-menu" aria-labelledby="catergories" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(15px, 78px, 0px);">
+						<button class="btn btn-dark" id="booksCatBtn" onclick="genListings('books');">Books</button>
+						<button class="btn btn-dark" id="clothingCatBtn" onclick="genListings('clothing');">Clothing</button>
+						<button class="btn btn-dark" id="electronicsCatBtn" onclick="genListings('electronics');">Electronics</button>
+						<button class="btn btn-dark" id="furnitureCatBtn" onclick="genListings('furniture');">Furniture</button>
+						<button class="btn btn-dark" id="otherCatBtn" onclick="genListings('other');">Other</button>
+					</div>
+					<span class="badge badge-primary" id="booksBadge" hidden>Books</span>
+					<span class="badge badge-primary" id="clothingBadge" hidden>Clothing</span>
+					<span class="badge badge-primary" id="electronicsBadge" hidden>Electronics</span>
+					<span class="badge badge-primary" id="furnitureBadge" hidden>Furniture</span>
+					<span class="badge badge-primary" id="otherBadge" hidden>Other</span>
+				</div><!-- End Categories -->
+				<br>
+				<div id="filters">
+					<h5>Filters</h5>
+					<div class="pl-4">
+						<button id="price" type="button" class="btn btn-secondary dropdown-toggle d-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Price</button> <br>
+						<div class="dropdown-menu" aria-labelledby="prices" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(15px, 78px, 0px);">
+							<button class="btn btn-dark" id="booksBtn" onclick="filter = 'price'; order = 'asc';">Lowest</button>
+							<button class="btn btn-dark" id="furnitureBtn" onclick="filter = 'price'; order = 'desc';">Highest</button>
+						</div>
+						<button id="date" type="button" class="btn btn-secondary dropdown-toggle d-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Date</button> <br>
+						<div class="dropdown-menu" aria-labelledby="date" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(15px, 78px, 0px);">
+							<button class="btn btn-dark" id="oldest" onclick="">Oldest</button>
+							<button class="btn btn-dark" id="newest" onclick="">Newest</button>
+						</div>
+						<button id="reviews" type="button" class="btn btn-secondary dropdown-toggle d-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reviews</button> <br>
+						<div class="dropdown-menu" aria-labelledby="reviews" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(15px, 78px, 0px);">
+							<button class="btn btn-dark" id="booksBtn" onclick="">Lowest</button>
+							<button class="btn btn-dark" id="furnitureBtn" onclick="">Highest</button>
+						</div>
+					</div>
+				</div><!-- End Filters -->
+			</div><!-- End Left Pane -->
+			<div class="col-10">
+				<div class="container no-gutters">
+					<div class="row card-deck" id="listings">
+						<div class="col-3">	
+							<div class="card">
+								<img src="{{site.baseurl}}/Empty.jpg" class="card-img-top">
+								<div class="card-body">
+									<h6 class="card-title">Title</h6>
+									<p class="card-text">Price</p>
+								</div>
+							</div>
+						</div>
+					</div><!-- End row -->
+				</div><!-- End containter -->
+			</div><!-- End Right Pane -->
+		</div><!-- End row -->
+  </body>
+  {% include footer.html %}
+</html>
+<script src="LoginChecker.js"></script>
+	
+	
+<script id="genListings" src="search.js" data-search="generic"></script>
+<script>
+	var filter = 'price';
+	var order = 'asc';
+// 	$( document ).ready(function() {
+//   	firebase.auth().onAuthStateChanged(function(user) {
+//   		if (user) {
+//     		console.log('signed in');
+// 			document.getElementById("login").setAttribute("hidden","");
+//   		} else {
+//     		console.log(' not signed in');
+//   		}
+// 		});
+// 	});
+  function genListings(search){
+	  document.getElementById("listings").innerHTML = '';
+		db.collection("items").where("category", "==", search).orderBy(filter, order).get()
+			.then(function(querySnapshot){
+				querySnapshot.forEach(function(doc){ // doc.data() is never undefined for query doc snapshots
+					var placeholder = document.createElement("div");
+					placeholder.setAttribute("class","col-3");
+					
+					var card = document.createElement("div");
+					card.setAttribute("class","card");
+					card.innerHTML= '<img src="{{site.baseurl}}/Empty.jpg" class="card-img-top"/>'; 
+					card.innerHTML += '<div class="card-body"><a class="card-title" href="' + ('item.html#' + doc.id) + '" target="_blank">'+ doc.data().title +'</a><p class="card-text">$'+ doc.data().price;
+					card.innerHTML += '</p></div>';
+					
+					placeholder.appendChild(card);
+					document.getElementById("listings").appendChild(placeholder);
+        });
+			});
+    var badge = document.getElementById(search+"Badge");
+    if(badge.hasAttribute("hidden")){ badge.removeAttribute("hidden"); }
+    else{ badge.setAttribute("hidden",""); }
+  }
+
+</script>

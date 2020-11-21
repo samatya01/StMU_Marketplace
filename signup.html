@@ -1,0 +1,96 @@
+---
+title: Account Signup
+---
+<!DOCTYPE html>
+<html>
+  <header>
+    {% include header.html %} <!-- Jekyll Liquid command -->
+    {% include fire.html %}
+    <script>
+     firebase.auth().onAuthStateChanged(function(user){
+	 	if(user){
+			/* redirect is user is signed in*/
+			window.location = "https://hmartinez20.github.io/STMUmarket/";
+		}
+	});
+
+      function whatever(){
+	var username = document.getElementById("username").value;
+        var email = username + "@mail.stmarytx.edu";
+        var password = document.getElementById("pass").value;
+        console.log(email);
+        console.log(password);
+
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(){
+		console.log(firebase.auth().currentUser.uid);
+		db.collection("users").doc(firebase.auth().currentUser.uid).set({
+    			email: email,
+			first: document.getElementById("firstName").value,
+			last: document.getElementById("lastName").value,
+			username: username,
+			bio: document.getElementById("bio").value
+		});
+	alert("Account created!");
+	window.location = "https://hmartinez20.github.io/STMUmarket/";
+		
+	}).catch(function(error) {
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			if (errorCode === 'auth/wrong-password') {
+				alert('Wrong password.');
+			} 
+			else if (errorCode === 'auth/user-not-found') {
+				alert('user-not-found.');
+			}    
+			else if (errorCode === 'auth/invalid-email') {
+				alert('invalid-email.');
+			}  	
+			});
+	      
+	}
+    
+    </script>
+  </header>
+  <body>
+  {% include navBar.html %}
+  <br>
+  <h1>Sign Up</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+
+      <label for="username"><b>Username - use st mary's</b></label><br>
+      <input type="text" placeholder="Enter st mary's username" name="username" required  id="username" >
+      <label for "email"> @mail.stmarytx.edu </label><br>
+
+      <label for="psw"><b>Password(must be 9 characters long)</b></label><br>
+      <input type="password" placeholder="Enter Password" name="psw" id="pass" ><br>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label><br>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
+
+      <!-- first name -->
+	  <label for="first"><b>First Name</b></label><br>
+      <input type="text" placeholder="Enter first name" name="first" id="firstName" ><br>
+	  <!-- last name -->
+	  <label for="last"><b>Last Name</b></label><br>
+      <input type="text" placeholder="Enter last name" name="last" id="lastName" ><br>
+	  <!-- user bio -->
+	  <label for="userInfo"><b>Enter a quick bio</b></label><br>
+      <input type="text" placeholder="Enter bio" name="userInfo" id="bio" ><br>
+
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn"   onclick="whatever()"     >Sign Up</button>
+      </div>
+	<br><br><br>
+    </div>
+  </body>
+  {% include footer.html %}
+</html> 
+<script>
+  console.log("test");
+  </script>
+
+<script src="LoginChecker.js"></script>

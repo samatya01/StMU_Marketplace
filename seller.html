@@ -1,0 +1,54 @@
+---
+title: Seller 
+---
+<!DOCTYPE html>
+<html>
+	<title> Seller Information </title>
+	<header>
+		{% include header.html %}
+		{% include fire.html %}
+		<style>
+			h2 {text-align:center;}
+		</style>
+	</header>
+	<body>
+		{% include navBar.html%}
+		
+		<div class="container">	
+		<!-- Display Seller's name as heading -->
+		<div id="sellerName" ></div>
+	
+		<!-- This Button triggers a popup that gives seller contact info-->
+		<button class = "btn btn-primary" id="popover2" title="Seller Contact Information" >
+				Contact Seller
+		</button>
+			
+		<!-- Testing for database 
+		<button class = "btn btn-dark" id="setinfo">
+				Set Seller Info	
+		</button>
+		-->
+		<br><br>
+		
+		<!-- Card that displays short seller biography/information -->
+		<div class="card bg-light mb-3" >
+			<div class="card-header"> Seller Information </div>
+			<div class="card-body" id="sellerInfo"></div>
+		</div>
+		<br>
+			
+		</div> <!-- End of container -->
+		
+	
+			<h2> Check out other listings by this seller: </h2>
+			<div style="margin-left:45px; margin-right:45px;" id="sellerListings"></div>
+	
+	<br><br><br>						      
+	</body>
+	{% include footer.html %}
+</html>
+
+
+<script src="sellerFunctions.js"></script>
+
+	
